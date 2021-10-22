@@ -1,0 +1,69 @@
+{
+  "name": "shiki-renderer-pdf",
+  "version": "0.0.0",
+  "description": "PDF renderer for shiki",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "default": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "pnpm clean && tsup src/index.ts --format esm,cjs --dts-resolve --splitting",
+    "format": "prettier -w .",
+    "lint:format": "prettier -c .",
+    "lint:types": "tsc",
+    "lint:xo": "xo",
+    "lint": "run-p lint:*",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "prepare": "husky install",
+    "prepublishOnly": "pnpm build",
+    "re": "node --loader ts-node/esm --experimental-specifier-resolution=node test.ts"
+  },
+  "peerDependencies": {
+    "shiki": "^0.9.12"
+  },
+  "dependencies": {
+    "hex-rgb": "^5.0.0",
+    "pdf-lib": "^1.17.0"
+  },
+  "devDependencies": {
+    "@swc/core": "1.2.102",
+    "@swc/jest": "0.2.5",
+    "@types/jest": "27.0.2",
+    "@types/node": "16.10.3",
+    "eslint-config-prettier": "8.3.0",
+    "husky": "7.0.4",
+    "jest": "27.3.1",
+    "lint-staged": "11.2.3",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.4.1",
+    "rimraf": "3.0.2",
+    "shiki": "0.9.12",
+    "ts-node": "10.3.1",
+    "tsup": "5.4.2",
+    "typescript": "4.4.4",
+    "xo": "0.45.0"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "xo": {
+    "extends": [
+      "prettier"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,ts,md,json,yaml}": "prettier -w"
+  }
+}
