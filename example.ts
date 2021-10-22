@@ -12,7 +12,7 @@ const a = async () => {
     )
   )
 
-  fs.writeFileSync('a.pdf', await pdf.save())
+  fs.writeFileSync('example.pdf', await pdf.save())
 }
 
 void a()
