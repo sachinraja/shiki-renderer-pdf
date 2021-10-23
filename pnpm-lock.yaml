@@ -7,7 +7,7 @@ specifiers:
   '@types/jest': 27.0.2
   '@types/node': 16.10.3
   eslint-config-prettier: 8.3.0
-  hex-rgb: ^5.0.0
+  hex-rgb: ^4.3.0
   husky: 7.0.4
   jest: 27.3.1
   lint-staged: 11.2.3
@@ -18,13 +18,13 @@ specifiers:
   rimraf: 3.0.2
   shiki: 0.9.12
   ts-node: 10.4.0
-  tsup: 5.4.3
+  tsup: 5.4.2
   typescript: 4.4.4
   xo: 0.45.0
 
 dependencies:
   '@pdf-lib/fontkit': 1.1.1
-  hex-rgb: 5.0.0
+  hex-rgb: 4.3.0
   pdf-lib: 1.17.0
 
 devDependencies:
@@ -42,7 +42,7 @@ devDependencies:
   rimraf: 3.0.2
   shiki: 0.9.12
   ts-node: 10.4.0_44c8507306bb3da3aabb5bbdd1550e1e
-  tsup: 5.4.3_ts-node@10.4.0+typescript@4.4.4
+  tsup: 5.4.2_ts-node@10.4.0+typescript@4.4.4
   typescript: 4.4.4
   xo: 0.45.0
 
@@ -2792,9 +2792,9 @@ packages:
       function-bind: 1.1.1
     dev: true
 
-  /hex-rgb/5.0.0:
-    resolution: {integrity: sha512-NQO+lgVUCtHxZ792FodgW0zflK+ozS9X9dwGp9XvvmPlH7pyxd588cn24TD3rmPm/N0AIRXF10Otah8yKqGw4w==}
-    engines: {node: '>=12'}
+  /hex-rgb/4.3.0:
+    resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
+    engines: {node: '>=6'}
     dev: false
 
   /hosted-git-info/2.8.9:
@@ -5273,8 +5273,8 @@ packages:
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
-  /tsup/5.4.3_ts-node@10.4.0+typescript@4.4.4:
-    resolution: {integrity: sha512-9dviObODm/Y5dcUnKlnMURoxhEzPQJFffK3KIE3AgV4KZjx5462/MtBO0Xi+8BGpmB/KT6NdlP31zqVKf4uE9A==}
+  /tsup/5.4.2_ts-node@10.4.0+typescript@4.4.4:
+    resolution: {integrity: sha512-R6Vxq6lrxvKBc9ZbJShHqARlysCxcEAXss9iyLPbZZDIl3CSftrO2IN0Flgkt6hMt1sTwgsXL3v5Ot3l305W1Q==}
     hasBin: true
     peerDependencies:
       typescript: ^4.2.3
