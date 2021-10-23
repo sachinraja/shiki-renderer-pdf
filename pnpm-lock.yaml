@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@pdf-lib/fontkit': 1.1.1
   '@swc/core': 1.2.102
   '@swc/jest': 0.2.5
   '@types/jest': 27.0.2
@@ -25,6 +26,7 @@ dependencies:
   hex-rgb: 4.3.0
 
 devDependencies:
+  '@pdf-lib/fontkit': 1.1.1
   '@swc/core': 1.2.102
   '@swc/jest': 0.2.5_@swc+core@1.2.102
   '@types/jest': 27.0.2
@@ -704,6 +706,12 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+    dev: true
+
+  /@pdf-lib/fontkit/1.1.1:
+    resolution: {integrity: sha512-KjMd7grNapIWS/Dm0gvfHEilSyAmeLvrEGVcqLGi0VYebuqqzTbgF29efCx7tvx+IEbG3zQciRSWl3GkUSvjZg==}
+    dependencies:
+      pako: 1.0.11
     dev: true
 
   /@pdf-lib/standard-fonts/1.0.0:

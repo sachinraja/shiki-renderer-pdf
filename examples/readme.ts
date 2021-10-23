@@ -1,6 +1,6 @@
 import fs from 'node:fs'
-import { PDFDocument } from 'pdf-lib'
 import shiki from 'shiki'
+import { PDFDocument } from 'pdf-lib'
 import { getPdfRenderer, hexToRgb } from '../src'
 
 // eslint-disable-next-line import/newline-after-import
@@ -12,11 +12,11 @@ import { getPdfRenderer, hexToRgb } from '../src'
 
   const pdfRenderer = getPdfRenderer({
     bg: hexToRgb('#2E3440'),
-    fontSize: 12,
     lineNumbers: {
       bg: hexToRgb('#151B27'),
       text: hexToRgb('#fff'),
     },
+    fontSize: 12,
   })
 
   const code = fs.readFileSync('examples/gen-pdf.ts', 'utf-8')

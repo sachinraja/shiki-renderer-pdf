@@ -1,6 +1,6 @@
 import fs from 'node:fs'
-import { PDFDocument } from 'pdf-lib'
 import { getHighlighter } from 'shiki'
+import { PDFDocument } from 'pdf-lib'
 import { getPdfRenderer, hexToRgb } from '../src'
 
 const renderPdf = async () => {
@@ -19,11 +19,11 @@ const renderPdf = async () => {
     'typescript'
   )
 
-  const pdfDoc = await PDFDocument.create()
+  const pdfDocument = await PDFDocument.create()
 
-  await pdfRenderer.renderToPdf(tokens, pdfDoc)
+  await pdfRenderer.renderToPdf(tokens, pdfDocument)
 
-  fs.writeFileSync('examples/material-ocean.pdf', await pdfDoc.save())
+  fs.writeFileSync('examples/material-ocean.pdf', await pdfDocument.save())
 }
 
 void renderPdf()
