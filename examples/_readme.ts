@@ -26,7 +26,7 @@ import { getPdfRenderer, hexToRgb } from '../src'
 
   await pdfRenderer.renderToPdf(tokens, pdfDocument)
 
-  fs.writeFileSync('examples/readme.pdf', await pdfDocument.save(), 'binary')
+  fs.writeFileSync('examples/_readme.pdf', await pdfDocument.save(), 'binary')
 
-  console.log('done: readme.pdf')
+  console.log('done: _readme.pdf')
 })()

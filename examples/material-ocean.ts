@@ -16,14 +16,18 @@ const renderPdf = async () => {
 
   const tokens = highlighter.codeToThemedTokens(
     fs.readFileSync('examples/gen-pdf.ts', 'utf8'),
-    'typescript'
+    'ts'
   )
 
   const pdfDocument = await PDFDocument.create()
 
   await pdfRenderer.renderToPdf(tokens, pdfDocument)
 
-  fs.writeFileSync('examples/material-ocean.pdf', await pdfDocument.save())
+  fs.writeFileSync(
+    'examples/material-ocean.pdf',
+    await pdfDocument.save(),
+    'binary'
+  )
 }
 
 void renderPdf()

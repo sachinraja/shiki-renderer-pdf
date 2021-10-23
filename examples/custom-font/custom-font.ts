@@ -43,7 +43,11 @@ const renderPdf = async () => {
     },
   })
 
-  fs.writeFileSync('examples/custom-font.pdf', await pdfDocument.save())
+  fs.writeFileSync(
+    'examples/custom-font.pdf',
+    await pdfDocument.save(),
+    'binary'
+  )
 }
 
 void renderPdf()

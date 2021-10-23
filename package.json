@@ -27,7 +27,7 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "prepare": "husky install",
     "prepublishOnly": "pnpm build",
-    "ex": "node --loader ts-node/esm --experimental-specifier-resolution=node examples/readme.ts"
+    "ex": "node --loader ts-node/esm --experimental-specifier-resolution=node examples/_readme.ts"
   },
   "peerDependencies": {
     "pdf-lib": "1",
