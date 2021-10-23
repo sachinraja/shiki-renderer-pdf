@@ -7,7 +7,7 @@ const a = async () => {
 
   const pdf = await renderToPdf(
     highlighter.codeToThemedTokens(
-      'console.log("Hello world")console.log("Hello world")console.log("Hello world")console.log("Hello world")\nconsole.log("Hello world")console.log("Hello world")console.log("Hello world")',
+      fs.readFileSync('src/index.ts', 'utf8'),
       'js'
     )
   )
