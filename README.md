@@ -42,7 +42,7 @@ import { getPdfRenderer, hexToRgb } from 'shiki-renderer-pdf'
 })()
 ```
 
-[Result](https://github.com/sachinraja/shiki-renderer-pdf/blob/main/examples/readme.pdf)
+[Result](https://github.com/sachinraja/shiki-renderer-pdf/blob/main/examples/_readme.pdf)
 
 Read more about what you can do with `pdfDocument` [here](https://pdf-lib.js.org/).
 
