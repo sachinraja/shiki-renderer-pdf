@@ -31,7 +31,9 @@ export const renderToPdf = async (
     fontSize
   )
 
-  const startingLineX = largestLineNumberStringWidth + 10
+  const startingLineX =
+    largestLineNumberStringWidth + Math.max(oneCharacterWidth, 15)
+
   const codePageWidth = pageDimensions.width - startingLineX
   const maxCharactersPerLine = Math.floor(codePageWidth / oneCharacterWidth)
 
@@ -63,7 +65,7 @@ export const renderToPdf = async (
         x:
           startingLineX -
           regularFont.widthOfTextAtSize(lineNumberString, fontSize) -
-          5,
+          Math.max(oneCharacterWidth, 10),
         y: currentLineY,
         size: fontSize,
         color: lineNumbers.text,
