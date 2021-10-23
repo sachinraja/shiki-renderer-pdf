@@ -2,6 +2,23 @@
   "name": "shiki-renderer-pdf",
   "version": "1.0.0",
   "description": "PDF renderer for shiki",
+  "author": "Sachin Raja <sachinraja2349@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sachinraja/shiki-renderer-pdf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sachinraja/shiki-renderer-pdf/issues"
+  },
+  "homepage": "https://github.com/sachinraja/shiki-renderer-pdf#readme",
+  "keywords": [
+    "shiki",
+    "renderer",
+    "pdf",
+    "syntax-highlighter",
+    "highlighter"
+  ],
   "type": "module",
   "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
