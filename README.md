@@ -5,7 +5,7 @@ PDF renderer for shiki
 # Installation
 
 ```shell
-npm install shiki-renderer-pdf pdf-lib
+npm install shiki-renderer-pdf shiki pdf-lib
 ```
 
 # Usage
