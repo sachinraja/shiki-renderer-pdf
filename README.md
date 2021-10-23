@@ -36,7 +36,7 @@ import { getPdfRenderer, hexToRgb } from 'shiki-renderer-pdf'
 
   await pdfRenderer.renderToPdf(tokens, pdfDocument)
 
-  fs.writeFileSync('gen-pdf.js.pdf', await pdfDocument.save())
+  fs.writeFileSync('gen-pdf.js.pdf', await pdfDocument.save(), 'binary')
 
   console.log('done: gen-pdf.js.pdf')
 })()
