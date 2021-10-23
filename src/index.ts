@@ -1,37 +1,36 @@
 // Rueoiarhea[r[,eau[rmeagrte8n[mapgvy[akt,lamtaeubmpeuay[rarg[earue[gat[g[]]]]]]]]]]
-import { IThemedToken } from 'shiki'
+import { FontStyle, IThemedToken } from 'shiki'
 import {
   PDFDocument,
+  PDFFont,
   PDFPageDrawTextOptions,
   rgb,
   StandardFonts,
 } from 'pdf-lib'
-import fontkit from '@pdf-lib/fontkit'
-import { LineNumberTransformations } from './types'
+import {
+  LineNumberTransformations,
+  PdfRendererOptions,
+  RenderToPdfOptions,
+} from './types'
 import { createPage, finishPage } from './page-utils'
 import { chunkString, hexToRgb } from './utils'
 
 const defaultColor = '#000000'
 
-const setupDoc = async () => {
-  const doc = await PDFDocument.create()
-  doc.registerFontkit(fontkit)
+export const renderToPdf = async (
+  lines: IThemedToken[][],
+  pdfDocument: PDFDocument,
+  { fontMap, fontSize, bg, lineNumbers }: RenderToPdfOptions
+) => {
+  let { page, pageDimensions } = createPage(pdfDocument, bg)
 
-  const font = await doc.embedFont(StandardFonts.Courier)
+  const regularFont = fontMap.regular
 
-  return { doc, font }
-}
-
-export const renderToPdf = async (lines: IThemedToken[][]) => {
-  const { doc, font } = await setupDoc()
-  let { page, pageDimensions } = createPage(doc)
-
-  const fontSize = 12
-  const oneCharacterWidth = font.widthOfTextAtSize('a', fontSize)
+  const oneCharacterWidth = regularFont.widthOfTextAtSize('a', fontSize)
   const maxCharactersPerLine = Math.floor(
     pageDimensions.width / oneCharacterWidth
   )
-  const largestLineNumberStringWidth = font.widthOfTextAtSize(
+  const largestLineNumberStringWidth = regularFont.widthOfTextAtSize(
     lines.length.toString(),
     fontSize
   )
@@ -46,9 +45,9 @@ export const renderToPdf = async (lines: IThemedToken[][]) => {
   const subtractLineYByFontSize = () => {
     lineY -= fontSize
     if (lineY < 0) {
-      finishPage(page, startingLineX, lineNumberTransformations)
+      finishPage(page, startingLineX, lineNumberTransformations, lineNumbers)
       lineNumberTransformations = []
-      ;({ page, pageDimensions } = createPage(doc))
+      ;({ page, pageDimensions } = createPage(pdfDocument, bg))
       lineY = pageDimensions.height - fontSize
     }
   }
@@ -65,25 +64,32 @@ export const renderToPdf = async (lines: IThemedToken[][]) => {
       currentPage.drawText(lineNumberString, {
         x:
           startingLineX -
-          font.widthOfTextAtSize(lineNumberString, fontSize) -
+          regularFont.widthOfTextAtSize(lineNumberString, fontSize) -
           5,
         y: currentLineY,
         size: fontSize,
-        color: rgb(...hexToRgb('#999')),
+        color: lineNumbers.text,
       })
     })
 
     for (const token of line) {
       tokenText.push(token.content)
 
-      const decimalRgbColor = hexToRgb(token.color ?? defaultColor)
+      let tokenFont = fontMap.regular
 
-      const tokenWidth = font.widthOfTextAtSize(token.content, fontSize)
+      if (token.fontStyle === FontStyle.Bold) {
+        tokenFont = fontMap.bold
+      } else if (token.fontStyle === FontStyle.Italic) {
+        tokenFont = fontMap.italic
+      }
+
+      const rgbColor = hexToRgb(token.color ?? defaultColor)
+      const tokenWidth = regularFont.widthOfTextAtSize(token.content, fontSize)
 
       const drawOptions: PDFPageDrawTextOptions = {
         size: fontSize,
-        color: rgb(...decimalRgbColor),
-        font,
+        color: rgbColor,
+        font: tokenFont,
       }
 
       if (tokenWidth > pageDimensions.width) {
@@ -99,7 +105,10 @@ export const renderToPdf = async (lines: IThemedToken[][]) => {
           subtractLineYByFontSize()
         }
 
-        lineX += font.widthOfTextAtSize(chunks[chunks.length - 1], fontSize)
+        lineX += tokenFont.widthOfTextAtSize(
+          chunks[chunks.length - 1],
+          fontSize
+        )
       } else {
         const potentialNewLineX = lineX + tokenWidth
 
@@ -119,7 +128,49 @@ export const renderToPdf = async (lines: IThemedToken[][]) => {
     }
   }
 
-  finishPage(page, startingLineX, lineNumberTransformations)
+  finishPage(page, startingLineX, lineNumberTransformations, lineNumbers)
 
-  return doc
+  return pdfDocument
 }
+
+export const getPdfRenderer = (options: PdfRendererOptions = {}) => {
+  const bg = options.bg ?? rgb(1, 1, 1)
+
+  const fontMap = options.fontMap ?? {
+    regular: StandardFonts.Courier,
+    italic: StandardFonts.CourierOblique,
+    bold: StandardFonts.CourierBold,
+  }
+
+  const fontSize = options.fontSize ?? 12
+
+  const decimal247 = 247 / 255
+  const decimal153 = 153 / 255
+
+  const lineNumbers = options.lineNumbers ?? {
+    bg: rgb(decimal247, decimal247, decimal247),
+    text: rgb(decimal153, decimal153, decimal153),
+  }
+
+  return {
+    renderToPdf: async (lines: IThemedToken[][], pdfDocument: PDFDocument) => {
+      const embedFontMap: Record<string, PDFFont> = {}
+
+      await Promise.all(
+        Object.entries(fontMap).map(async ([variation, font]) => {
+          const embedFont = await pdfDocument.embedFont(font)
+          embedFontMap[variation] = embedFont
+        })
+      )
+
+      return renderToPdf(lines, pdfDocument, {
+        bg,
+        fontMap: embedFontMap,
+        fontSize,
+        lineNumbers,
+      })
+    },
+  }
+}
+
+export { hexToRgb }

@@ -1,10 +1,18 @@
-import { PDFDocument, PDFPage, rgb } from 'pdf-lib'
-import { LineNumberTransformations } from './types'
-import { hexToRgb } from './utils'
+import { Color, PDFDocument, PDFPage } from 'pdf-lib'
+import { LineNumberTransformations, RenderToPdfOptions } from './types'
 
-export const createPage = (pdfDoc: PDFDocument) => {
+export const createPage = (pdfDoc: PDFDocument, bg: Color) => {
   const page = pdfDoc.addPage()
   const pageDimensions = page.getSize()
+
+  // Background
+  page.drawRectangle({
+    x: 0,
+    y: 0,
+    width: pageDimensions.width,
+    height: pageDimensions.height,
+    color: bg,
+  })
 
   return { page, pageDimensions }
 }
@@ -12,23 +20,26 @@ export const createPage = (pdfDoc: PDFDocument) => {
 export const finishPage = (
   page: PDFPage,
   startingLineX: number,
-  lineNumberTransformations: LineNumberTransformations
+  lineNumberTransformations: LineNumberTransformations,
+  lineNumberColors: RenderToPdfOptions['lineNumbers']
 ) => {
   const lineX = startingLineX - 5
 
+  // Line number separation line
   page.drawLine({
     start: { x: lineX, y: 0 },
     end: { x: lineX, y: page.getHeight() },
-    color: rgb(...hexToRgb('#999')),
+    color: lineNumberColors.text,
     thickness: 2,
   })
 
+  // Background for line numbers
   page.drawRectangle({
     x: 0,
     y: 0,
     width: lineX,
     height: page.getHeight(),
-    color: rgb(...hexToRgb('#f7f7f7')),
+    color: lineNumberColors.bg,
   })
 
   for (const transformation of lineNumberTransformations) {

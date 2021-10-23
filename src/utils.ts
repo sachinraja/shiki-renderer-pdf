@@ -1,4 +1,5 @@
 import hexRgb from 'hex-rgb'
+import { rgb } from 'pdf-lib'
 
 export const chunkString = (string: string, size: number) => {
   const chunksCount = Math.ceil(string.length / size)
@@ -25,5 +26,5 @@ export const hexToRgb = (hex: string) => {
     number
   ]
 
-  return decimalRgbColor
+  return rgb(...decimalRgbColor)
 }
