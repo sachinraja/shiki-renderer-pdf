@@ -7,7 +7,7 @@ specifiers:
   '@types/jest': 27.0.2
   '@types/node': 16.10.3
   eslint-config-prettier: 8.3.0
-  hex-rgb: ^4.3.0
+  hex-rgb: ^5.0.0
   husky: 7.0.4
   jest: 27.3.1
   lint-staged: 11.2.3
@@ -24,7 +24,7 @@ specifiers:
 
 dependencies:
   '@pdf-lib/fontkit': 1.1.1
-  hex-rgb: 4.3.0
+  hex-rgb: 5.0.0
   pdf-lib: 1.17.0
 
 devDependencies:
@@ -2792,9 +2792,9 @@ packages:
       function-bind: 1.1.1
     dev: true
 
-  /hex-rgb/4.3.0:
-    resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
-    engines: {node: '>=6'}
+  /hex-rgb/5.0.0:
+    resolution: {integrity: sha512-NQO+lgVUCtHxZ792FodgW0zflK+ozS9X9dwGp9XvvmPlH7pyxd588cn24TD3rmPm/N0AIRXF10Otah8yKqGw4w==}
+    engines: {node: '>=12'}
     dev: false
 
   /hosted-git-info/2.8.9:
