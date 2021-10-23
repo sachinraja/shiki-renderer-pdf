@@ -1,5 +1,5 @@
 test("message contains 'Hello'", () => {
-  expect('Helloa').toContain('Hello')
+  expect('Hello').toContain('Hello')
 })
 
 export {}

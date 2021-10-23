@@ -1,9 +1,11 @@
 import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import path from 'node:path'
 import { PDFDocument } from 'pdf-lib'
 import { getHighlighter } from 'shiki'
-import { getPdfRenderer, hexToRgb } from './src'
+import { getPdfRenderer, hexToRgb } from '../src'
 
-const a = async () => {
+const renderPdf = async () => {
   const highlighter = await getHighlighter({ theme: 'material-ocean' })
 
   const pdfRenderer = getPdfRenderer({
@@ -16,14 +18,20 @@ const a = async () => {
 
   const tokens = highlighter.codeToThemedTokens(
     fs.readFileSync('src/index.ts', 'utf8'),
-    'ts'
+    'js'
   )
 
   const pdfDoc = await PDFDocument.create()
 
   await pdfRenderer.renderToPdf(tokens, pdfDoc)
 
-  fs.writeFileSync('example.pdf', await pdfDoc.save())
+  fs.writeFileSync(
+    path.join(
+      path.dirname(fileURLToPath(import.meta.url)),
+      'material-ocean.pdf'
+    ),
+    await pdfDoc.save()
+  )
 }
 
-void a()
+void renderPdf()

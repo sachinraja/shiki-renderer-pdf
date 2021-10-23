@@ -1,4 +1,3 @@
-// Rueoiarhea[r[,eau[rmeagrte8n[mapgvy[akt,lamtaeubmpeuay[rarg[earue[gat[g[]]]]]]]]]]
 import { FontStyle, IThemedToken } from 'shiki'
 import {
   PDFDocument,
