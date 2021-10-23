@@ -26,15 +26,14 @@ export const renderToPdf = async (
   const regularFont = fontMap.regular
 
   const oneCharacterWidth = regularFont.widthOfTextAtSize('a', fontSize)
-  const maxCharactersPerLine = Math.floor(
-    pageDimensions.width / oneCharacterWidth
-  )
   const largestLineNumberStringWidth = regularFont.widthOfTextAtSize(
     lines.length.toString(),
     fontSize
   )
 
   const startingLineX = largestLineNumberStringWidth + 10
+  const codePageWidth = pageDimensions.width - startingLineX
+  const maxCharactersPerLine = Math.floor(codePageWidth / oneCharacterWidth)
 
   let lineY = pageDimensions.height
 
@@ -91,21 +90,44 @@ export const renderToPdf = async (
         font: tokenFont,
       }
 
-      if (tokenWidth > pageDimensions.width) {
-        const chunks = chunkString(token.content, maxCharactersPerLine)
+      if (tokenWidth > codePageWidth) {
+        // Account for different lineX
+        const firstChunkSize = Math.floor(
+          (pageDimensions.width - lineX) / oneCharacterWidth
+        )
+        const firstChunk = token.content.slice(0, firstChunkSize)
 
-        for (const chunk of chunks) {
+        const restofTokenContent = token.content.slice(firstChunkSize)
+
+        const otherChunks = chunkString(
+          restofTokenContent,
+          maxCharactersPerLine
+        )
+
+        page.drawText(firstChunk, {
+          x: lineX,
+          y: lineY,
+          ...drawOptions,
+        })
+
+        subtractLineYByFontSize()
+        lineX = startingLineX
+
+        for (const [i, chunk] of otherChunks.entries()) {
           page.drawText(chunk, {
             x: lineX,
             y: lineY,
             ...drawOptions,
           })
 
-          subtractLineYByFontSize()
+          if (i !== otherChunks.length - 1) {
+            subtractLineYByFontSize()
+            lineX = startingLineX
+          }
         }
 
         lineX += tokenFont.widthOfTextAtSize(
-          chunks[chunks.length - 1],
+          otherChunks[otherChunks.length - 1],
           fontSize
         )
       } else {
