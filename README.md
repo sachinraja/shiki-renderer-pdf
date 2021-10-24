@@ -85,6 +85,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
   const tokens = highlighter.codeToThemedTokens(code, 'js')
 
   await renderToPdf(tokens, pdfDocument, {
+    defaultColor: rgb(1, 1, 1),
     bg: hexToRgb('#2E3440'),
     lineNumbers: {
       bg: hexToRgb('#151B27'),

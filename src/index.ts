@@ -14,12 +14,10 @@ import {
 import { createPage, finishPage } from './page-utils'
 import { chunkString, hexToRgb } from './utils'
 
-const defaultColor = '#000000'
-
 export const renderToPdf = async (
   lines: IThemedToken[][],
   pdfDocument: PDFDocument,
-  { fontMap, fontSize, bg, lineNumbers }: RenderToPdfOptions
+  { defaultColor, bg, lineNumbers, fontMap, fontSize }: RenderToPdfOptions
 ) => {
   let normalizedLines = lines
 
@@ -98,7 +96,7 @@ export const renderToPdf = async (
         tokenFont = fontMap.italic
       }
 
-      const rgbColor = hexToRgb(token.color ?? defaultColor)
+      const rgbColor = token.color ? hexToRgb(token.color) : defaultColor
       const tokenWidth = regularFont.widthOfTextAtSize(token.content, fontSize)
 
       const drawOptions: PDFPageDrawTextOptions = {
@@ -172,6 +170,7 @@ export const renderToPdf = async (
 }
 
 export const getPdfRenderer = (options: PdfRendererOptions = {}) => {
+  const defaultColor = options.defaultColor ?? rgb(0, 0, 0)
   const bg = options.bg ?? rgb(1, 1, 1)
 
   const fontMap = options.fontMap ?? {
@@ -202,6 +201,7 @@ export const getPdfRenderer = (options: PdfRendererOptions = {}) => {
       )
 
       return renderToPdf(lines, pdfDocument, {
+        defaultColor,
         bg,
         fontMap: embedFontMap,
         fontSize,

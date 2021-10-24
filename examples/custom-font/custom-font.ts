@@ -2,7 +2,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fs from 'node:fs'
 import { getHighlighter } from 'shiki'
-import { PDFDocument } from 'pdf-lib'
+import { PDFDocument, rgb } from 'pdf-lib'
 import fontkit from '@pdf-lib/fontkit'
 import { renderToPdf, hexToRgb } from '../../src'
 
@@ -26,10 +26,11 @@ const renderPdf = async () => {
 
   const tokens = highlighter.codeToThemedTokens(
     fs.readFileSync('examples/gen-pdf.ts', 'utf8'),
-    'typescript'
+    'ts'
   )
 
   await renderToPdf(tokens, pdfDocument, {
+    defaultColor: rgb(1, 1, 1),
     bg: hexToRgb('#2E3440'),
     lineNumbers: {
       bg: hexToRgb('#151B27'),

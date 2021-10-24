@@ -5,6 +5,7 @@ export type LineNumberTransformations = Array<(currentPage: PDFPage) => void>
 type FontVariations = 'regular' | 'bold' | 'italic'
 
 export type CommonOptions = {
+  defaultColor: Color
   bg: Color
   fontSize: number
   lineNumbers: {
