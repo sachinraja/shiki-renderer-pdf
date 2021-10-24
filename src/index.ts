@@ -21,13 +21,28 @@ export const renderToPdf = async (
   pdfDocument: PDFDocument,
   { fontMap, fontSize, bg, lineNumbers }: RenderToPdfOptions
 ) => {
+  let normalizedLines = lines
+
+  // If only one token exists
+  // it might be plaintext and should be split by newlines
+  if (lines.length === 1 && lines[0].length === 1) {
+    const newLines: IThemedToken[][] = []
+    const token = lines[0][0]
+
+    for (const line of token.content.split('\n')) {
+      newLines.push([{ ...token, content: line }])
+    }
+
+    normalizedLines = newLines
+  }
+
   let { page, pageDimensions } = createPage(pdfDocument, bg)
 
   const regularFont = fontMap.regular
 
   const oneCharacterWidth = regularFont.widthOfTextAtSize('a', fontSize)
   const largestLineNumberStringWidth = regularFont.widthOfTextAtSize(
-    lines.length.toString(),
+    normalizedLines.length.toString(),
     fontSize
   )
 
@@ -52,7 +67,7 @@ export const renderToPdf = async (
     }
   }
 
-  for (const [i, line] of lines.entries()) {
+  for (const [i, line] of normalizedLines.entries()) {
     subtractLineYByFontSize()
 
     const tokenText: string[] = []
