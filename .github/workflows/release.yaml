@@ -1,6 +1,8 @@
 name: Test
 
-on: pull_request
+on:
+  push:
+    branches: [main]
 
 jobs:
   test:
@@ -26,6 +28,3 @@ jobs:
 
       - name: Test
         run: pnpm test
-
-      - name: Release
-        run: pnpm semantic-release

@@ -1,6 +1,6 @@
 {
   "name": "shiki-renderer-pdf",
-  "version": "1.1.2",
+  "version": "0.0.0-development",
   "description": "PDF renderer for shiki",
   "author": "Sachin Raja <sachinraja2349@gmail.com>",
   "license": "MIT",
@@ -68,6 +68,7 @@
     "prettier": "2.4.1",
     "regenerator-runtime": "0.13.9",
     "rimraf": "3.0.2",
+    "semantic-release": "18.0.0",
     "shiki": "0.9.12",
     "ts-node": "10.4.0",
     "tsup": "5.4.2",
@@ -88,5 +89,16 @@
   },
   "lint-staged": {
     "*.{js,ts,md,json,yaml}": "prettier -w"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
   }
 }
