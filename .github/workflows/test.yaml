@@ -26,6 +26,3 @@ jobs:
 
       - name: Test
         run: pnpm test
-
-      - name: Release
-        run: pnpm semantic-release
