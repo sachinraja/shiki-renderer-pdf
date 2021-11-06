@@ -13,7 +13,7 @@ specifiers:
   jest: 27.3.1
   lint-staged: 11.2.6
   npm-run-all: 4.1.5
-  pdf-lib: 1.17.0
+  pdf-lib: 1.17.1
   prettier: 2.4.1
   regenerator-runtime: 0.13.9
   rimraf: 3.0.2
@@ -39,7 +39,7 @@ devDependencies:
   jest: 27.3.1_ts-node@10.4.0
   lint-staged: 11.2.6
   npm-run-all: 4.1.5
-  pdf-lib: 1.17.0
+  pdf-lib: 1.17.1
   prettier: 2.4.1
   regenerator-runtime: 0.13.9
   rimraf: 3.0.2
@@ -5185,8 +5185,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /pdf-lib/1.17.0:
-    resolution: {integrity: sha512-INe7i0CatJR+YwizvldDeJgXF2jlBnhqpUbUeWGLr95SldYTO1j9mLg7IZwKHJ4FHi3E2VmM+jEVL+d2bExO0A==}
+  /pdf-lib/1.17.1:
+    resolution: {integrity: sha512-V/mpyJAoTsN4cnP31vc0wfNA1+p20evqqnap0KLoRUN0Yk/p3wN52DOEsL4oBFcLdb76hlpKPtzJIgo67j/XLw==}
     dependencies:
       '@pdf-lib/standard-fonts': 1.0.0
       '@pdf-lib/upng': 1.0.1
