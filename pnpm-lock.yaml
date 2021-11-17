@@ -20,7 +20,7 @@ specifiers:
   semantic-release: 18.0.0
   shiki: 0.9.12
   ts-node: 10.4.0
-  tsup: 5.7.0
+  tsup: 5.7.1
   typescript: 4.4.4
   xo: 0.46.4
 
@@ -46,7 +46,7 @@ devDependencies:
   semantic-release: 18.0.0
   shiki: 0.9.12
   ts-node: 10.4.0_9b0835b96f911f4b828fab055b82f938
-  tsup: 5.7.0_ts-node@10.4.0+typescript@4.4.4
+  tsup: 5.7.1_ts-node@10.4.0+typescript@4.4.4
   typescript: 4.4.4
   xo: 0.46.4
 
@@ -6207,8 +6207,8 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
-  /tsup/5.7.0_ts-node@10.4.0+typescript@4.4.4:
-    resolution: {integrity: sha512-Rt83NU4t3e0I2WyubR3doAAl/aijzNYVgWB8cZxem/6MfoutrOFssm6L8eMVIGvPPOYsDDVcAvXLwn+CUgeRAQ==}
+  /tsup/5.7.1_ts-node@10.4.0+typescript@4.4.4:
+    resolution: {integrity: sha512-ZRhyJE2QoVKyCKz6i6wh/4LIpD9xpQ1J4JIY6ZupxxLB1aQfVl7N16Ur9+ZjqknPt/jRn/wnV/OnypuRP0MgBQ==}
     hasBin: true
     peerDependencies:
       typescript: ^4.2.3
