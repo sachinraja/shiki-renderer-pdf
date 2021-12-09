@@ -1,7 +1,7 @@
 {
   "name": "shiki-renderer-pdf",
   "version": "0.0.0-development",
-  "description": "PDF renderer for shiki",
+  "description": "PDF renderer for Shiki",
   "author": "Sachin Raja <sachinraja2349@gmail.com>",
   "license": "MIT",
   "repository": {
