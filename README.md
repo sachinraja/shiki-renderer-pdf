@@ -4,13 +4,13 @@ PDF renderer for Shiki
 
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-# Installation
+## Installation
 
-```shell
+```sh
 npm install shiki-renderer-pdf shiki pdf-lib
 ```
 
-# Usage
+## Usage
 
 ```js
 import fs from 'node:fs'
@@ -48,7 +48,7 @@ import { getPdfRenderer, hexToRgb } from 'shiki-renderer-pdf'
 
 Read more about what you can do with `pdfDocument` [here](https://pdf-lib.js.org/).
 
-## Custom Fonts
+### Custom Fonts
 
 This requires an extra install - `@pdf-lib/fontkit`.
 
@@ -105,6 +105,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 [Result](https://github.com/sachinraja/shiki-renderer-pdf/blob/main/examples/custom-font.pdf)
 
-# Examples
+## Examples
 
 See the [examples](https://github.com/sachinraja/shiki-renderer-pdf/tree/main/examples) for more on how the renderer can be used.
